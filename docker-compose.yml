@@ -1,0 +1,57 @@
+version: '3.8'
+services:
+  # MongoDB
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - '27017:27017'
+    networks:
+      - tienda-network
+    volumes:
+      - mongo-data:/data/db
+
+  # Microservicio de productos
+  productos:
+    build:
+      context: ./microservicio-productos
+    container_name: microservicio-productos
+    ports:
+      - '5000:5000'
+    networks:
+      - tienda-network
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/microservicio-productos
+
+  # Microservicio de clientes
+  clientes:
+    build:
+      context: ./microservicio-clientes
+    container_name: microservicio-clientes
+    ports:
+      - '5001:5001'
+    networks:
+      - tienda-network
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/microservicio-clientes
+
+  # Microservicio de ventas
+  ventas:
+    build:
+      context: ./microservicio-ventas
+    container_name: microservicio-ventas
+    ports:
+      - '5002:5002'
+    networks:
+      - tienda-network
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/microservicio-ventas
+
+
+networks:
+  tienda-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local
