@@ -12,7 +12,7 @@ Cada microservicio tiene su base de datos, elegimos para las 3 bases de datos Mo
 - Primero necesitas clonar el repositorio con el siguiente comando en CMD
 
 ```bash
-  git clone https://github.com/RansilvaV29/administracio_de_una_tienda_con_microservicios.git
+  git clone https://github.com/RansilvaV29/tienda_con_microservicios.git
 ```
 
 - Despues vamos a levantar el docker-compose donde estan dockerizados los microservicios
